@@ -37,8 +37,12 @@ export class PostsService implements IPostService {
   }
 
   private isLocationClose(loc1: LocationDto, loc2: LocationDto): boolean {
-    const distance = Math.sqrt((loc1.x - loc2.x) ** 2 + (loc1.y - loc2.y) ** 2);
-    const maxDistance = 0.01; // Ajuste este valor conforme necessário
+    const latDistance = (loc1.x - loc2.x) * 111; // 1 grau de latitude ≈ 111 km
+    const lonDistance = (loc1.y - loc2.y) * 111 * Math.cos(loc1.x * (Math.PI / 180)); // ajuste pela latitude
+
+    const distance = Math.sqrt(latDistance ** 2 + lonDistance ** 2);
+    const maxDistance = 5; // 5 km  
+
     return distance < maxDistance;
   }
 
