@@ -26,10 +26,10 @@ LostAndFoundMatcher is an API for matching lost and found items based on various
 ### Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/lost-and-found-matcher.git
+```bash
+git clone https://github.com/yourusername/lost-and-found-matcher.git
 
-
+```
 2. Navigate to the project directory:
 
   ```bash
