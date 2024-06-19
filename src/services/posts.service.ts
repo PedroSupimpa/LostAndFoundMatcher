@@ -3,6 +3,7 @@ import { PostDto } from '../dto/post.dto';
 import { LocationDto } from '../dto/location.dto';
 import { ImageDto } from '../dto/image.dto';
 import { IPostService } from 'src/interfaces/post.interface';
+import Fuse from 'fuse.js';
 
 @Injectable()
 export class PostsService implements IPostService {
@@ -28,8 +29,19 @@ export class PostsService implements IPostService {
   private isMatch(post1: PostDto, post2: PostDto): boolean {
     let matchCount = 0;
 
-    if (post1.title === post2.title) matchCount++;
-    if (post1.description === post2.description) matchCount++;
+    const fuseOptions = {
+      includeScore: true,
+      threshold: 0.4,
+    };
+
+    const titleFuse = new Fuse([post1.title], fuseOptions);
+    const titleResult = titleFuse.search(post2.title);
+    if (titleResult.length > 0 && titleResult[0].score <= 0.4) matchCount++;
+
+    const descriptionFuse = new Fuse([post1.description], fuseOptions);
+    const descriptionResult = descriptionFuse.search(post2.description);
+    if (descriptionResult.length > 0 && descriptionResult[0].score <= 0.4) matchCount++;
+
     if (this.isLocationClose(post1.location, post2.location)) matchCount++;
     if (this.isImageSimilar(post1.images, post2.images)) matchCount++;
 
