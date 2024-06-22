@@ -1,6 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
-
-import { PostsService } from 'src/services/posts.service';
+import { Controller, Post, Body } from '@nestjs/common';
+import { PostsService } from '../services/posts.service';
 import { PostDto } from '../dto/post.dto';
 
 @Controller('posts')
