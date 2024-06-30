@@ -1,6 +1,6 @@
-# LostAndFoundMatcher
+# Item Match API
 
-LostAndFoundMatcher is an API for matching lost and found items based on various criteria such as title, description, location, and images.
+Item Match is an API for matching lost and found items based on various criteria such as title, description, location, and images.
 
 ## Features
 
